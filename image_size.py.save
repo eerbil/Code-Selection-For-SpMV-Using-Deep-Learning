@@ -1,0 +1,14 @@
+import os
+from PIL import Image
+
+size = 400, 400
+matrices = os.listdir("images")
+print len(matrices)
+for infile in matrices:
+    print infile
+    try:
+        im = Image.open("/Code-Selection-For-SpMV-Using-Deep-Learning/image_400/)
+        im.thumbnail(size, Image.ANTIALIAS)
+        im.save("/Code-Selection-For-SpMV-Using-Deep-Learning/image_400/" + infile, "png")
+    except IOError:
+        print "cannot create thumbnail for '%s'" % infile
