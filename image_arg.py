@@ -52,6 +52,11 @@ pix = im.load()
 for i in range(img_row / coef):
     for j in range(img_row / coef):
         # print (int(255*mtx_int[i][j]), int(255*mtx_int[i][j]), int(255*mtx_int[i][j]))
-        pix[(i, j)] = (int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]))
+        c = int(min(mtx_int[i][j], 255))
+        pix[(i, j)] = (c, c, c)
+# for i in range(img_row / coef):
+#     for j in range(img_row / coef):
+#         # print (int(255*mtx_int[i][j]), int(255*mtx_int[i][j]), int(255*mtx_int[i][j]))
+#         pix[(i, j)] = (int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]))
 inverted = Image.eval(im, lambda (x): 255 - x)
 inverted.save(sys.argv[1] + ".png", "PNG")

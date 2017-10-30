@@ -15,24 +15,26 @@ for line in matrices:
     mtx_col = sio.mminfo(directory)[1]
     print name[1]
 
-    if mtx_row <= 1000:
-        coef = 1
-    elif 1000 < mtx_row <= 5000:
-        coef = 5
-    elif 5000 < mtx_row <= 10000:
-        coef = 10
-    elif 10000 < mtx_row <= 50000:
-        coef = 50
-    elif 50000 < mtx_row <= 100000:
-        coef = 100
-    elif 100000 < mtx_row <= 500000:
-        coef = 500
-    elif 500000 < mtx_row <= 1000000:
-        coef = 1000
-    elif 1000000 < mtx_row <= 5000000:
-        coef = 5000
-    else:
-        coef = 10000
+    # if mtx_row <= 1000:
+    #     coef = 1
+    # elif 1000 < mtx_row <= 5000:
+    #     coef = 5
+    # elif 5000 < mtx_row <= 10000:
+    #     coef = 10
+    # elif 10000 < mtx_row <= 50000:
+    #     coef = 50
+    # elif 50000 < mtx_row <= 100000:
+    #     coef = 100
+    # elif 100000 < mtx_row <= 500000:
+    #     coef = 500
+    # elif 500000 < mtx_row <= 1000000:
+    #     coef = 1000
+    # elif 1000000 < mtx_row <= 5000000:
+    #     coef = 5000
+    # else:
+    #     coef = 10000
+
+    coef = 200
     
 #    print coef
     if (mtx_row % coef) != 0:
@@ -55,7 +57,12 @@ for line in matrices:
     for i in range(img_row / coef):
         for j in range(img_row / coef):
             # print (int(255*mtx_int[i][j]), int(255*mtx_int[i][j]), int(255*mtx_int[i][j]))
-            pix[(i, j)] = (int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]))
+            c = int(min(mtx_int[i][j], 255))
+            pix[(i, j)] = (c, c, c)
+    # for i in range(img_row / coef):
+    #     for j in range(img_row / coef):
+    #         # print (int(255*mtx_int[i][j]), int(255*mtx_int[i][j]), int(255*mtx_int[i][j]))
+    #         pix[(i, j)] = (int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]), int(255 * mtx_int[i][j]))
     inverted = Image.eval(im, lambda (x): 255 - x)
     inverted.save(name[1] + ".png", "PNG")
 e = 'echo "Test completed on milner" | ssmtp eerbil13@ku.edu.tr'
